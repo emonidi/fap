@@ -1,0 +1,466 @@
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|center_horizontal"
+    android:animateLayoutChanges="false"
+    android:animationCache="true"
+    android:background="#000"
+    android:gravity="right"
+    tools:context=".MainActivity" >
+
+    <FrameLayout
+        android:id="@+id/splashLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#e74c3c"
+        android:foregroundGravity="center_horizontal" >
+
+        <ImageView
+            android:id="@+id/splashLogoImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/clear" />
+
+        <TableRow
+            android:id="@+id/appNameLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:paddingRight="72dp" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="VA"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#fff"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="WEATHER"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#fff"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/weatherLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="85dp"
+            android:background="#4c4b49"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/cityTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="15dp"
+                android:text="@string/cityTextView"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#fff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/countryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:text="@string/countryTextView"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="#3c3c3a"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Thu 26 July 2013"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#00a3d2" />
+        </LinearLayout>
+
+        <GridLayout
+            android:id="@+id/grid"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/temperatureLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#02a8d0"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/temperatureTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="13"
+                    android:textColor="#fff"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecastDay1"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#02a8d0"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="1"
+                    android:textColor="#fff"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/ImageView04"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecastDay2"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#02a8d0"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/TextView05"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="2"
+                    android:textColor="#fff"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/ImageView05"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecastDay3"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#02a8d0"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/TextView06"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="3"
+                    android:textColor="#fff"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/ImageView06"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/clear" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forecastDay4"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#02a8d0"
+                android:clipChildren="false"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/TextView07"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="4"
+                    android:textColor="#fff"
+                    android:textSize="80sp" />
+
+                <ImageView
+                    android:id="@+id/ImageView07"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/clear" />
+            </LinearLayout>
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/conditionsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="20dp"
+                android:text="Sunny..clear...Some Clouds"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/foreCastDayLayout_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/foreCastDayOneWeekDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="#3c3c3a"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:tag="weekDay"
+                    android:text="TextView"
+                    android:textSize="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#4c4b49"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:baselineAlignBottom="false"
+                        android:cropToPadding="false"
+                        android:maxHeight="20dp"
+                        android:src="@drawable/na_64"
+                        android:tag="dailyForeCastIcon" />
+
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:tag="weekDayTemperature"
+                        android:text="15"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#fff"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/foreCastDayLayout_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/foreCastDayTwoWeekDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#3c3c3a"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:tag="weekDay"
+                    android:text="TextView"
+                    android:textSize="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#4c4b49"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/ImageView01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:maxHeight="20dp"
+                        android:src="@drawable/na_64"
+                        android:tag="dailyForeCastIcon" />
+
+                    <TextView
+                        android:id="@+id/TextView01"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:tag="weekDayTemperature"
+                        android:text="15"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#fff"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/foreCastDayLayout_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/foreCastDayThreeWeekDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#3c3c3a"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:tag="weekDay"
+                    android:text="TextView"
+                    android:textSize="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#4c4b49"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/ImageView02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:maxHeight="20dp"
+                        android:src="@drawable/na_64"
+                        android:tag="dailyForeCastIcon" />
+
+                    <TextView
+                        android:id="@+id/TextView02"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:tag="weekDayTemperature"
+                        android:text="15"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#fff"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/foreCastDayLayout_4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/foreCastDayFourWeekDay"
+                    android:layout_width="fill_parent"
+                    android:layout_height="32dp"
+                    android:background="#3c3c3a"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:tag="weekDay"
+                    android:text="TextView"
+                    android:textSize="17dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#4c4b49"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:id="@+id/ImageView03"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center_horizontal"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:maxHeight="20dp"
+                        android:src="@drawable/na_64"
+                        android:tag="dailyForeCastIcon" />
+
+                    <TextView
+                        android:id="@+id/TextView03"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:tag="weekDayTemperature"
+                        android:text="15"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#fff"
+                        android:textSize="25sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
