@@ -32,24 +32,26 @@ public final class R {
         public static final int hazy=0x7f020008;
         public static final int hazy_64=0x7f020009;
         public static final int ic_launcher=0x7f02000a;
-        public static final int mostlycloudy=0x7f02000b;
-        public static final int mostlycloudy_64=0x7f02000c;
-        public static final int mostlysunny=0x7f02000d;
-        public static final int mostlysunny_64=0x7f02000e;
-        public static final int na=0x7f02000f;
-        public static final int na_64=0x7f020010;
-        public static final int partlycloudy=0x7f020011;
-        public static final int partlycloudy_64=0x7f020012;
-        public static final int partlysunny=0x7f020013;
-        public static final int partlysunny_64=0x7f020014;
-        public static final int rain=0x7f020015;
-        public static final int rain_64=0x7f020016;
-        public static final int sleet=0x7f020017;
-        public static final int sleet_64=0x7f020018;
-        public static final int snow=0x7f020019;
-        public static final int snow_64=0x7f02001a;
-        public static final int tstorms=0x7f02001b;
-        public static final int tstorms_64=0x7f02001c;
+        public static final int loader=0x7f02000b;
+        public static final int mostlycloudy=0x7f02000c;
+        public static final int mostlycloudy_64=0x7f02000d;
+        public static final int mostlysunny=0x7f02000e;
+        public static final int mostlysunny_64=0x7f02000f;
+        public static final int na=0x7f020010;
+        public static final int na_64=0x7f020011;
+        public static final int partlycloudy=0x7f020012;
+        public static final int partlycloudy_64=0x7f020013;
+        public static final int partlysunny=0x7f020014;
+        public static final int partlysunny_64=0x7f020015;
+        public static final int rain=0x7f020016;
+        public static final int rain_64=0x7f020017;
+        public static final int refresh=0x7f020018;
+        public static final int sleet=0x7f020019;
+        public static final int sleet_64=0x7f02001a;
+        public static final int snow=0x7f02001b;
+        public static final int snow_64=0x7f02001c;
+        public static final int tstorms=0x7f02001d;
+        public static final int tstorms_64=0x7f02001e;
     }
     public static final class id {
         public static final int ImageView01=0x7f080023;
@@ -90,6 +92,7 @@ public final class R {
         public static final int linearLayout1=0x7f080007;
         public static final int linearLayout2=0x7f08000a;
         public static final int mainLayout=0x7f080000;
+        public static final int refreshIcon=0x7f08002e;
         public static final int splashLayout=0x7f080001;
         public static final int splashLogoImageView=0x7f080002;
         public static final int temperatureLayout=0x7f08000d;
@@ -100,7 +103,8 @@ public final class R {
         public static final int weatherLayout=0x7f080006;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
+        public static final int actionbar_indeterminate_progress=0x7f030000;
+        public static final int activity_main=0x7f030001;
     }
     public static final class menu {
         public static final int main=0x7f070000;

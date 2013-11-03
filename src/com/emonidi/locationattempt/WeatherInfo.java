@@ -9,7 +9,7 @@ class WeatherInfo {
 	public int temperature_high;
 	public int temperature_low;
 	public Double temp_now;
-	
+	public String color;
 	
 	public String conditions;
 	public String weekDay;

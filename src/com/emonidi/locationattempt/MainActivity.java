@@ -4,9 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.bool;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.annotation.SuppressLint;
+import android.content.ClipData.Item;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,7 +25,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -49,9 +57,9 @@ public class MainActivity extends FragmentActivity {
 	
 	String lat;
 	String lng;
+	MenuItem refreshIcon;
 	
-	
-	
+	Location location;
 	ArrayList<WeatherInfo> weatherInfo;
 	
 	private WeatherInfo conditions;
@@ -77,12 +85,13 @@ public class MainActivity extends FragmentActivity {
 	TextView temperatureTextView;
 	TextView conditionsTextView;
 	ScrollManager sm;
-	
-	
+	MenuItem ri;
 	
 		
 	WeatherLocation weatherLocation = new WeatherLocation();
 	ImagePicker iPicker = new ImagePicker();
+
+	private Menu menu;
 	
 	
     @Override
@@ -90,7 +99,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-         
+        
         
          l1 = (LinearLayout) findViewById(R.id.foreCastDayLayout_1);
          l2 = (LinearLayout) findViewById(R.id.foreCastDayLayout_2);
@@ -108,39 +117,21 @@ public class MainActivity extends FragmentActivity {
         
         splashLayout = (FrameLayout) findViewById(R.id.splashLayout);
         weatherLayout = (LinearLayout) findViewById(R.id.weatherLayout);
+        ImageView splashIcon = (ImageView) findViewById(R.id.splashLogoImageView);
+        rotateSplash(splashIcon);
         //hide weatherLayout
         
-        rotateSplash();
+        
         
     	LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
     	LocationListener locationListener = new LocationListener() {
     	    public void onLocationChanged(Location location) {
     	      // Called when a new location is found by the network location provider.
+    	      weatherLocation.location= location;
     	      makeUseOfNewLocation(location);
     	    }
     	    
-    	    private void makeUseOfNewLocation(Location location) {
-    	    	if (location != null) {    	    		
-    	    		Log.v("Location", location.toString());
-    	    		lat = String.valueOf(location.getLatitude());
-    	    		lng = String.valueOf(location.getLongitude());
-    	    		
-    	    		getCity(lat,lng);
-    	    		try {
-						getWeather(lat,lng);
-						getDayLight(lat,lng);
-						getConditions(lat,lng);
-				         
-
-					} catch (IllegalStateException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-    	    	}else{
-    	    		Log.v("Location","LOCATION IS NULL");
-    	    	}
-    	    	
-    	    }
+    	    
 
 			public void onStatusChanged(String provider, int status, Bundle extras) {}
 
@@ -157,13 +148,35 @@ public class MainActivity extends FragmentActivity {
     	    	
     }
     
-	private void rotateSplash(){
-	    	RotateAnimation rAnimation = new RotateAnimation(0f,350f,60f,60f);
-	    	rAnimation.setInterpolator(new LinearInterpolator());
-	    	rAnimation.setRepeatCount(Animation.INFINITE);
-	    	rAnimation.setDuration(2000);
-	    	
-	    	ImageView splashLogoImageView = (ImageView) findViewById(R.id.splashLogoImageView);
+    public void makeUseOfNewLocation(Location location) {
+    	if (location != null) {    	    		
+    		Log.v("Location", location.toString());
+    		lat = String.valueOf(location.getLatitude());
+    		lng = String.valueOf(location.getLongitude());
+    		
+    		getCity(lat,lng);
+    		try {
+				
+				getDayLight(lat,lng);
+				getConditions(lat,lng);
+				getWeather(lat,lng);
+
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}else{
+    		Log.v("Location","LOCATION IS NULL");
+    	}
+    	
+    }
+    
+	@SuppressLint("NewApi")
+	private void rotateSplash(ImageView target){
+		
+		ObjectAnimator animator = ObjectAnimator.ofFloat(target, "rotation", 3600);
+		animator.setDuration(10000);
+		animator.start();
 	}
     
     private void getConditions(String lat, String lng){
@@ -247,7 +260,18 @@ public class MainActivity extends FragmentActivity {
     		 }
     	});
     }
-   
+    
+    @SuppressLint("NewApi")
+	private void inflateIcon(LinearLayout layout){
+    	ImageView icon = (ImageView) layout.findViewWithTag("dailyForeCastIcon");
+    	ObjectAnimator anim  = ObjectAnimator.ofFloat(icon,"alpha",5);
+    	anim.setDuration(500);
+    	anim.start();
+    }
+    
+    private void deflateIcons(){
+    	
+    }
     
     private void getCity(String lat,String lng){
     	Geocoder geoCoder = new Geocoder(getApplicationContext());
@@ -297,9 +321,11 @@ public class MainActivity extends FragmentActivity {
     	    				wi.day = date.getAsJsonObject().get("day").getAsString();
     	    				wi.month = date.getAsJsonObject().get("monthname").getAsString();
     	    				wi.year = date.getAsJsonObject().get("year").getAsString();
+    	    				wi.color = getColor(Double.parseDouble(String.valueOf(wi.temperature_high)));
     	    				
     	    				weatherInfo.add(wi);
     	    				sm.addWeatherInfo(wi);
+    	    				sm.deployWeather(wi,i+1);
     	    				
     			 	}
     			 		
@@ -311,6 +337,7 @@ public class MainActivity extends FragmentActivity {
     				
     				deployWeather(weatherInfo.get(0));
     				Log.e("DEPLOYED","TRUE");
+    				
     		 }
     	});
     }
@@ -352,10 +379,11 @@ public class MainActivity extends FragmentActivity {
 	   	
     	splashLayout.setVisibility(View.GONE);
     	weatherLayout.setVisibility(1);
+    	refreshAnimation(false);
     	
     }
     
-    private void setDayForecastLayouts(LinearLayout layout, final int weatherInfoIndex){
+    private void setDayForecastLayouts(final LinearLayout layout, final int weatherInfoIndex){
     	
     	int color = Color.parseColor(getColor(Double.parseDouble(String.valueOf(weatherInfo.get(weatherInfoIndex).temperature_high))));
     	TextView weekDay = (TextView) layout.findViewWithTag("weekDay");
@@ -374,8 +402,12 @@ public class MainActivity extends FragmentActivity {
     	
 			@Override
 			public void onClick(View v) {
-				
-				sm.focusLayout(weatherInfoIndex);
+				if(weatherInfoIndex == 0){
+					sm.focusLayout(weatherInfoIndex-1,false);
+					inflateIcon(layout);
+				}else{
+					sm.focusLayout(weatherInfoIndex,false);
+				}
 			}
     		
     	});
@@ -407,8 +439,36 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        
-        return true;
+        refreshIcon = menu.findItem(R.id.refreshIcon);
+        refreshAnimation(true);
+        return super.onCreateOptionsMenu(menu);
+    }
+    
+    @SuppressLint("NewApi")
+	private void refreshAnimation(boolean running){
+    	if(running){
+			refreshIcon.setActionView(R.layout.actionbar_indeterminate_progress);
+    	}else{
+    		refreshIcon.setActionView(null);
+    	}
+    }
+    
+    
+    @SuppressLint("NewApi")
+	public boolean onOptionsItemSelected(MenuItem item){
+		
+    	switch (item.getItemId()){
+    		case R.id.refreshIcon:
+    			makeUseOfNewLocation(weatherLocation.location);
+    			refreshAnimation(true);
+    			sm.focusLayout(-1,false);
+    			
+    			return true;
+    		
+    	}
+		
+		return false;
+    
     }
     
 }

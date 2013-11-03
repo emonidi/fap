@@ -1,10 +1,12 @@
 package com.emonidi.locationattempt;
 
+import android.location.Location;
 import android.text.format.Time;
 
 public class WeatherLocation{
 	String city;
 	String country;
+	Location location;
 	Time sunrise;
 	Time sunset;
 	
